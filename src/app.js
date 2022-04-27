@@ -1,8 +1,10 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
-import route from './routes';
-import errorHandler from './middlewares/errorHandler';
+import userRouter from './routes';
+import  errorHandler  from './middlewares';
+
+
 
 const app = express();
 
@@ -21,7 +23,7 @@ app.use(cors());
 app.use(errorHandler);
 
 // Routes go here
-app.use(route);
+app.use(userRouter);
 
 app.get('/', (req, res) => {
   res.send('<h1>Server is running!</h1>');

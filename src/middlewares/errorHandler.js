@@ -1,4 +1,4 @@
-function ErrorHandler(Error, req, res, next) {
+function errorHandler(Error, req, res, next) {
   res.status(Error.status || 500);
   console.log("Error Handler Middleware Running");
   res.send({
@@ -7,4 +7,4 @@ function ErrorHandler(Error, req, res, next) {
   });
 }
 
-export default ErrorHandler;
+export default errorHandler;

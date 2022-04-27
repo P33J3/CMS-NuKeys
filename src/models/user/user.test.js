@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { async } from "regenerator-runtime";
 import User from ".";
-import { populateUsers, purgeUsersTable } from "../../helpers/tests";
+import { populateUsers, purgeUsersTable } from "../../helpers";
 import db from "../../lib/knex";
 
 describe("User Model", () => {
