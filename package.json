@@ -1,0 +1,66 @@
+{
+  "name": "nodejs_template",
+  "version": "1.0.0",
+  "description": "Template for NodeJS Server",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start:dev": "npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/index.js",
+    "build": "babel src -d dist",
+    "start": "npm run build && node ./dist/index.js",
+    "setup:test:db": "set NODE_ENV=test && npm run migrate:run && npm run seed:run",
+    "test": "npm run setup:test:db && jest src/",
+    "lint": "eslint . --fix",
+    "create:migration": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js migrate:make ",
+    "create:seed": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js  seed:make ",
+    "migrate:run": "./node_modules/.bin/knex migrate:latest --knexfile=./src/lib/knex/config.js",
+    "migrate:rollback": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js migrate:rollback",
+    "seed:run": "./node_modules/.bin/knex seed:run --knexfile=./src/lib/knex/config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P33J3/NodeJS_Scaffold.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "Peter-Jon Lawrence and Audax Anchirinah (Supervisor)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/P33J3/NodeJS_Scaffold/issues"
+  },
+  "homepage": "https://github.com/P33J3/NodeJS_Scaffold#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-react": "^7.29.3",
+    "jest": "^27.5.1",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.15",
+    "prettier": "2.5.1",
+    "regenerator-runtime": "^0.13.9",
+    "supertest": "^6.2.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "faker": "^5.1.0",
+    "http-errors": "^2.0.0",
+    "knex": "^1.0.4",
+    "pg": "^8.7.3"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/helpers/tests/setupTests.js"
+    ]
+  }
+}
