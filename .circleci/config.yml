@@ -18,11 +18,14 @@ jobs:
       - run:
           command: npm run build
           name: Build app
+
+      -coveralls/upload
+
       - persist_to_workspace:
           root: ../
           paths:
             - .
-      -coveralls/upload
+
   deploy: # this can be any name you choose
     docker:
       - image: cimg/node:17.2.0
