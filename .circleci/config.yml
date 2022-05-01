@@ -19,7 +19,7 @@ jobs:
           command: npm run build
           name: Build app
       - persist_to_workspace:
-          root: ~/CMS-NuKeys
+          root: ../
           paths:
             - .
   deploy: # this can be any name you choose
@@ -27,7 +27,7 @@ jobs:
       - image: cimg/node:17.2.0
     steps:
       - attach_workspace:
-          at: ~/CMS-NuKeys
+          at: ../
       - heroku/deploy-via-git:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 workflows:
