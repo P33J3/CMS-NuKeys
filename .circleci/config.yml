@@ -10,7 +10,6 @@ jobs:
       - image: cimg/node:17.2.0
     steps:
       - checkout
-      - store_test_results
       - node/install-packages:
           pkg-manager: npm
       - run:
@@ -23,6 +22,7 @@ jobs:
           root: ../
           paths:
             - .
+      -coveralls/upload
   deploy: # this can be any name you choose
     docker:
       - image: cimg/node:17.2.0
