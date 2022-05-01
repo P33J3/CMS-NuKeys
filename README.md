@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/P33J3/CMS-NuKeys/badge.svg?branch=main)](https://coveralls.io/github/P33J3/CMS-NuKeys?branch=main)
+
 # NodeJS_Scaffold
 
 This is a template for creating a NodeJS Express Server.
