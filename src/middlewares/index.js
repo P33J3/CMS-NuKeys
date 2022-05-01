@@ -1,3 +1,1 @@
-import errorHandler from './errorHandler'
-
-export default errorHandler;
+export { errorHandler } from './handlers/errorHandler';

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { async } from "regenerator-runtime";
-import User from ".";
+import { User } from "../index";
 import { populateUsers, purgeUsersTable } from "../../helpers";
 import db from "../../lib/knex";
 

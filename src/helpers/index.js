@@ -1,3 +1,1 @@
-import {populateUsers, purgeUsersTable} from './tests'
-
-export * from './tests'
+export { populateUsers, purgeUsersTable } from './tests/index';
