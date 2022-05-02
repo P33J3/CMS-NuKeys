@@ -9,7 +9,7 @@
     "build": "babel src -d dist",
     "start": "npm run build && node ./dist/index.js",
     "setup:test:db": "set NODE_ENV=test && npm run migrate:run && npm run seed:run",
-    "test": "npm run setup:test:db && jest src/",
+    "test": "npm run setup:test:db && jest src/ cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=html",
     "lint": "eslint . --fix",
     "create:migration": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js migrate:make ",
     "create:seed": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js  seed:make ",
@@ -17,6 +17,7 @@
     "migrate:rollback": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js migrate:rollback",
     "seed:run": "./node_modules/.bin/knex seed:run --knexfile=./src/lib/knex/config.js"
   },
+  "coverage": "nyc report --reporter=text-lcov | coveralls",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/P33J3/NodeJS_Scaffold.git"
@@ -35,15 +36,19 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
+    "@babel/register": "^7.17.7",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
+    "coveralls": "^3.1.1",
     "eslint": "^8.11.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-react": "^7.29.3",
     "jest": "^27.5.1",
     "mocha": "^9.2.2",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.15",
+    "nyc": "^15.1.0",
     "prettier": "2.5.1",
     "regenerator-runtime": "^0.13.9",
     "supertest": "^6.2.2"
