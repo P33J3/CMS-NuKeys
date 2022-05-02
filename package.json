@@ -9,7 +9,7 @@
     "build": "babel src -d dist",
     "start": "npm run build && node ./dist/index.js",
     "setup:test:db": "set NODE_ENV=test && npm run migrate:run && npm run seed:run",
-    "test": "npm run setup:test:db && jest src/ cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=html node --harmony_proxies node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "npm run setup:test:db && jest src/ cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=html --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "eslint . --fix",
     "create:migration": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js migrate:make ",
     "create:seed": "./node_modules/.bin/knex --knexfile=./src/lib/knex/config.js  seed:make ",
