@@ -4,6 +4,4 @@ node_modules
 dist
 screenshots
 logs
-coverage
-coveralls_ci
 .env.example
