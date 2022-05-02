@@ -1,105 +1,55 @@
-#
-#version: 2.1
-#orbs:
-#  coveralls: coveralls/coveralls@1.0.5
-#  node: circleci/node@4.7.0
-#  heroku: circleci/heroku@1.2.6
-#
-#jobs:
-#  build_and_test: # this can be any name you choose
-#    docker:
-#      - image: cimg/node:17.2.0
-#    steps:
-#      - checkout
-#      - node/install-packages:
-#          pkg-manager: npm
-#      - run:
-#          command: npm run test
-#          name: Run tests
-#      - run:
-#          command: npm run build
-#          name: Build app
-#
-#      - persist_to_workspace:
-#          root: ../
-#          paths:
-#            - .
-#
-#  deploy: # this can be any name you choose
-#    docker:
-#      - image: cimg/node:17.2.0
-#    steps:
-#      - attach_workspace:
-#          at: ../
-#      - heroku/deploy-via-git:
-#          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
-#workflows:
-#  build_test_deploy: # this can be any name you choose
-#    jobs:
-#      - build_and_test
-#      - deploy:
-#          requires:
-#            - build_and_test # only deploy if the build_and_test job has completed
-#          filters:
-#            branches:
-#              only: main # only deploy when on main
 
 version: 2.1
-
 orbs:
   coveralls: coveralls/coveralls@1.0.5
-  node: circleci/node@1.1.6
+  node: circleci/node@4.7.0
+  heroku: circleci/heroku@1.2.6
 
 jobs:
-  build-1:
-    executor:
-      name: node/default
-
+  build_and_test: # this can be any name you choose
+    docker:
+      - image: cimg/node:17.2.0
     steps:
       - checkout
-
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: make test-coverage-1
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test
+          name: Run tests
+      - run:
+          command: npm run build
+          name: Build app
 
       - coveralls/upload:
-          parallel: true
+          parallel: false
           flag_name: Test 1
           verbose: true
 
-  build-2:
-    executor:
-      name: node/default
+      - persist_to_workspace:
+          root: ../
+          paths:
+            - .
 
+  deploy: # this can be any name you choose
+    docker:
+      - image: cimg/node:17.2.0
     steps:
-      - checkout
-
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: make test-coverage-2
-
-      - coveralls/upload:
-          parallel: true
-          flag_name: Test 2
-          verbose: true
-
-  done:
-    executor:
-      name: node/default
-
-    steps:
-      - coveralls/upload:
-          parallel_finished: true
-
+      - attach_workspace:
+          at: ../
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 workflows:
-  test_parallel_then_upload:
+  build_test_deploy: # this can be any name you choose
     jobs:
-      - build-1
-      - build-2
-      - done:
-          requires: [build-1, build-2]
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
+
+
 commands:
   upload:
     parameters:
