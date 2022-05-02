@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/P33J3/CMS-NuKeys/badge.svg?branch=main)](https://coveralls.io/github/P33J3/CMS-NuKeys?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/P33J3/CMS-NuKeys/badge.svg?branch=testCoverage)](https://coveralls.io/github/P33J3/CMS-NuKeys?branch=testCoverage)
 
 # NodeJS_Scaffold
 
