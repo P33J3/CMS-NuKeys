@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start:dev": "npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/index.js set NODE_ENV= development",
+    "start:dev": "NODE_ENV=development npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/index.js ",
     "build": "babel src -d dist",
     "start": "npm run build && node ./dist/index.js",
     "setup:test:db": "set NODE_ENV=test && npm run migrate:run && npm run seed:run",
