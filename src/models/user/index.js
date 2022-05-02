@@ -1,6 +1,6 @@
 import db from '../../lib/knex';
 
-export default class User {
+export class User {
   static retrieveUser() {
     return {
       firstname: this.firstname,
