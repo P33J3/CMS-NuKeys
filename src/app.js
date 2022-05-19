@@ -1,15 +1,21 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
-import { userRouter } from './routes';
+import passport from 'passport';
+import passportConfig from './config/passport';
+import { userRouter, userRegRouter } from './routes';
 import { errorHandler } from './middlewares';
 import { morganMiddleware, Logger } from './lib';
 
+
+
 const app = express();
 
+passportConfig(passport);
 // Middlewares
 
 app.use(morganMiddleware);
+app.use(passport.initialize());
 
 // Bodyparser
 // parse application/x-www-form-urlencoded
@@ -24,7 +30,9 @@ app.use(cors());
 app.use(errorHandler);
 
 // Routes go here
-app.use(userRouter);
+app.use('/reg', userRegRouter)
+app.use('/admin', passport.authenticate('jwt', { session: false }), userRouter);
+
 
 // to be removed after successful implementation of logger
 app.get('/logger', (_, res) => {

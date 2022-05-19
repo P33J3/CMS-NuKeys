@@ -1,4 +1,6 @@
-import db from '../../lib/knex';
+import { async } from "regenerator-runtime";
+import { db, dbReg } from '../../lib/knex';
+
 
 export class User {
   static retrieveUser() {
@@ -21,7 +23,7 @@ export class User {
   }
 
   static async getUserById(id) {
-    return db('users').where('id', id);
+    return dbReg('users').where('id', id);
   }
 
   static async updateUserById(id, updateObject) {
