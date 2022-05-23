@@ -1,3 +1,3 @@
-export { UserController } from './user/index'
+export { UserController } from './user/index';
 
-export { UserRegController } from './user/userReg'
+export { UserRegController } from './user/userReg';

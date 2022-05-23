@@ -1,18 +1,16 @@
-import { async } from "regenerator-runtime";
-import { db, dbReg } from '../../lib/knex';
-
+import { async } from 'regenerator-runtime';
+import { db } from '../../lib/knex';
 
 export class userReg {
   static async retrieveUser(username) {
-    return dbReg('regusers').where('username', username);
-      // username: this.username,
-      // password: this.password,
-
+    return db('regusers').where('username', username);
+    // username: this.username,
+    // password: this.password,
   }
 
-  static async addNewUser(username, password, hash, salt) {
-    return dbReg('regusers').insert({
-      username, password, hash, salt,
+  static async addNewUser(username, password) {
+    return db('regusers').insert({
+      username, password,
     }).returning('id')
       .then(([user]) => db('users').insert(({
         id: user.id,
@@ -22,7 +20,7 @@ export class userReg {
   }
 
   static async getUsers() {
-    return dbReg.select().table('regusers');
+    return db.select().table('regusers');
   }
 
   // static async getUserById(id) {
