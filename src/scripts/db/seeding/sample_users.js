@@ -6,7 +6,7 @@ const faker = require('faker');
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex('users').del();
+  // await knex('users').del();
   for (let i = 0; i < 10; i += 1) {
     await knex('users').insert([
       {

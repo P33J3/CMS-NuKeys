@@ -17,6 +17,11 @@ export class UserRegController {
     } = req.body;
     const user = await userReg.retrieveUser(username);
     console.log('User', user[0]);
+
+    res.status(200)
+      .json({
+        user,
+      });
   }
 
   async getOneUserId(req, res) {
@@ -32,11 +37,26 @@ export class UserRegController {
       });
   }
 
-  // async
-  // addOneUser(req, res)
-  // {
-  //
-  // }
+  async addOneUser(req, res) {
+    const {
+      username,
+      password,
+    } = req.body;
+
+    const userInfo = await userReg.addNewUser(username, password);
+
+    const user = await userReg.retrieveUser(username);
+
+    // eslint-disable-next-line max-len
+    res.status(200)
+      .json({
+        success: true,
+        user: user[0],
+      });
+    // res.status(401).json({ success: false, msg: 'action failed' });
+
+    // res.redirect('/reg/users');
+  }
 
   async updateOneUserById(req, res) {
     console.log('Params', req.params);

@@ -1,5 +1,5 @@
 import { async } from 'regenerator-runtime';
-import { db } from '../../lib/knex';
+import { db } from '../../lib/index';
 
 export class userReg {
   static async retrieveUser(username) {

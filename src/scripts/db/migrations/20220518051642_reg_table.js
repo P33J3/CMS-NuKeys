@@ -9,8 +9,7 @@ exports.up = function (knex) {
 
     t.string('username').notNull();
     t.string('password').notNull();
-    t.string('hash').nullable();
-    t.string('salt').nullable();
+
   });
 };
 

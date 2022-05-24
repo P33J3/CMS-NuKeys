@@ -12,7 +12,7 @@ userRegRouter.route('/retrieve').get(userRegController.retrieveUser);
 
 // userRegRouter.route("/users/updateuser/:userId").get(userRegController.updateOneUserById);
 
-// userRegRouter.route('/adduser').post(userRegController.addOneUser);
+userRegRouter.route('/adduser').post(userRegController.addOneUser);
 
 // userRegRouter
 //   .route("/users/deleteuser/:userId")
