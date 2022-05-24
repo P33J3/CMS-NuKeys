@@ -6,9 +6,9 @@ describe('Users route', () => {
     chai.use(http);
     const request = chai.request(app)
     it('GET /users', () => {
-        request.get('/users')
+        request.get('/admin/users')
         .end((err, res) => {
             expect(res.status).to.eq(200)
         })
-    }) 
+    })
 })

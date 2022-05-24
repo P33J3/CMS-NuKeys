@@ -8,7 +8,8 @@ exports.up = function (knex) {
     t.string('title').notNull();
     t.integer('cost').nullable();
     t.text('description').nullable();
-    t.integer('id');
+    t.integer('id').references('id').inTable('users')
+      .onDelete('CASCADE');
   });
 };
 
