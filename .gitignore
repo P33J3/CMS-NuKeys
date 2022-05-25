@@ -6,6 +6,7 @@ screenshots
 logs
 .env.example
 
+
 # Logs
 logs
 *.log

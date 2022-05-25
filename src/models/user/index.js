@@ -1,4 +1,5 @@
-import db from '../../lib/knex';
+import { async } from 'regenerator-runtime';
+import { db } from '../../lib/knex';
 
 export class User {
   static retrieveUser() {
