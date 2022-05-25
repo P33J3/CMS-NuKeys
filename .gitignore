@@ -1,10 +1,13 @@
 .idea
 .env
+*.lcov
 node_modules
 dist
+coverage
 screenshots
 logs
-.env.example
+
+
 
 # Logs
 logs

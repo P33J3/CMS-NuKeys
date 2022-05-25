@@ -1,9 +1,10 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
-import { userRouter } from './routes';
+
+import { userRouter, userRegRouter } from './routes';
 import { errorHandler } from './middlewares';
-import { morganMiddleware, Logger } from './lib';
+import { morganMiddleware, Logger } from './lib/index';
 
 const app = express();
 
@@ -24,7 +25,8 @@ app.use(cors());
 app.use(errorHandler);
 
 // Routes go here
-app.use(userRouter);
+app.use('/reg', userRegRouter);
+app.use('/admin', userRouter);
 
 // to be removed after successful implementation of logger
 app.get('/logger', (_, res) => {
