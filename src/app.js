@@ -4,8 +4,7 @@ import cors from 'cors';
 
 import { userRouter, userRegRouter } from './routes';
 import { errorHandler } from './middlewares';
-import { morganMiddleware } from './lib/loggers/morganMiddleware';
-import { Logger } from './lib/loggers/logger';
+import { morganMiddleware, Logger } from './lib/index';
 
 const app = express();
 
