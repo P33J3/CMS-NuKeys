@@ -4,19 +4,21 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('documents', (t) => {
-    t.increments('doc_id');
+    t.increments('id').unsigned().primary();
+
     t.string('title').notNull();
-    t.integer('cost').nullable();
-    t.text('description').nullable();
-    t.integer('id').references('id').inTable('users')
-      .onDelete('CASCADE');
+    t.string('body').nullable();
+    t.string('author_id').nullable();
+    t.timestamp('created_at').defaultTo(knex.fn.now());
+    t.integer('profileId');
   });
 };
+
 
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  knex.schema.dropTable('documents');
+  return knex.schema.dropTable('documents');
 };

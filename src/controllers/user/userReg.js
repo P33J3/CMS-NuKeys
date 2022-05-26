@@ -1,4 +1,7 @@
+import bcrypt from 'bcrypt';
+
 import { userReg } from '../../models';
+
 
 export class UserRegController {
   async getAllUsers(req, res) {
@@ -38,24 +41,26 @@ export class UserRegController {
   }
 
   async addOneUser(req, res) {
-    const {
-      username,
-      password,
-    } = req.body;
+    try {
+      const {
+        username,
+        password,
+      } = req.body;
 
-    const userInfo = await userReg.addNewUser(username, password);
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await userReg.retrieveUser(username);
+      const userInfo = await userReg.addNewUser(username, hashedPassword);
 
-    // eslint-disable-next-line max-len
-    res.status(200)
-      .json({
-        success: true,
-        user: user[0],
-      });
-    // res.status(401).json({ success: false, msg: 'action failed' });
+      const user = await userReg.retrieveUser(username);
 
-    // res.redirect('/reg/users');
+      res.status(200)
+        .json({
+          success: true,
+          user: user[0],
+        });
+    } catch {
+      res.redirect('/')
+    }
   }
 
   async updateOneUserById(req, res) {

@@ -6,14 +6,14 @@ const faker = require('faker');
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex('documents').del();
+  // await knex('documents').del();
   for (let i = 0; i < 10; i += 1) {
     await knex('documents').insert([
       {
         title: faker.lorem.words(3),
-        cost: 2,
-        description: faker.lorem.sentence(5),
-        id: 2,
+        body: faker.lorem.words(8),
+        author_id: faker.internet.userName(),
+        profileId: 2,
       },
     ]);
   }

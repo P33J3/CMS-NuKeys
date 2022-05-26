@@ -13,6 +13,8 @@ exports.seed = async function (knex) {
         id: faker.random.number(),
         username: faker.internet.userName(),
         password: faker.internet.password(),
+        profileId: faker.random.number(),
+
       },
     ]);
   }

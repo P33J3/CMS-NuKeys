@@ -8,6 +8,8 @@ exports.up = function (knex) {
     t.increments('id').unsigned().primary();
     t.string('username').notNull();
     t.string('password').notNull();
+    t.timestamp('last_login').defaultTo(knex.fn.now());
+    t.integer('profileId').nullable();
   });
 };
 
