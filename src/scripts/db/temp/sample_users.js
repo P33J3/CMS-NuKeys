@@ -16,6 +16,7 @@ exports.seed = async function (knex) {
         lastname: faker.name.lastName(),
         age: faker.random.number(),
         address: faker.address.secondaryAddress(),
+        profileId: 2,
       },
     ]);
   }

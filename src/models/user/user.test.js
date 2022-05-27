@@ -27,10 +27,12 @@ describe("User Model", () => {
     await db('users').insert([
       {
         id: 90,
+        email: 'law@law.com',
         firstname: 'Ronald',
         lastname: 'Levy',
         age: 57,
         address: 'James Bond Beach',
+        profileId: 2,
       },
     ]);
     const retrieve = db("users").where("firstname", "TestFName");
@@ -42,6 +44,7 @@ describe("User Model", () => {
     const user = await User.updateUserById(1, {
       firstname: "TestingUpdate",
       lastname: "TestingUpdateLname",
+      email: 'jude@law.com',
       age: 23,
       address: "24 Golden Path",
     })

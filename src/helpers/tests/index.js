@@ -10,16 +10,19 @@ export async function populateUsers() {
     await db('users').insert([
       {
         id: faker.random.number(),
+        email: faker.internet.email(),
         firstname: faker.name.firstName(),
         lastname: faker.name.lastName(),
         age: faker.random.number(),
         address: faker.address.secondaryAddress(),
+        profileId: 2,
       },
     ]);
   }
   await db('users').insert([
     {
       id: 1,
+      email: 'slash@law.com',
       firstname: 'Peter',
       lastname: 'Bond',
       age: 70,
