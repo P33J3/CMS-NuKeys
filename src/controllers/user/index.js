@@ -21,6 +21,18 @@ export class UserController {
     });
   }
 
+  async getOneUserEmail(req, res) {
+    const tester = await User.getUsers();
+    console.log('testerID', tester[0].email);
+    console.log('params', req.params);
+    const { email } = req.params;
+    const response = await User.getUserByEmail(email);
+
+    res.status(200).json({
+      response,
+    });
+  }
+
   async addOneUser(req, res) {
     const { firstname, lastname, age } = req.body;
     const { address } = req.body;

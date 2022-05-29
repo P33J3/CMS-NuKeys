@@ -25,6 +25,10 @@ export class User {
     return db('users').where('id', id);
   }
 
+  static async getUserByEmail(email) {
+    return db('users').where('email', email);
+  }
+
   static async updateUserById(id, updateObject) {
     return db('users')
       .where('id', id)

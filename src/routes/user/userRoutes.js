@@ -8,6 +8,8 @@ userRouter.route('/users').get(userController.getAllUsers);
 
 userRouter.route('/users/:userId').get(userController.getOneUserId);
 
+userRouter.route('/users/:email').get(userController.getOneUserEmail);
+
 userRouter.route('/users/updateuser/:userId').get(userController.updateOneUserById);
 
 userRouter.route('/users/adduser').post(userController.addOneUser);
