@@ -1,3 +1,3 @@
 export { User } from './user/index';
 
-export { userReg } from './user/loginUser';
+// export { userReg } from './user/loginUser';

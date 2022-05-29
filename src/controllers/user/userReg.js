@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
 
-import { userReg } from '../../models';
+import { User } from '../../models';
 
 
 export class UserRegController {
   async getAllUsers(req, res) {
-    const response = await userReg.getUsers();
+    const response = await User.getLoginUsers();
 
     res.status(200)
       .json({
@@ -18,7 +18,7 @@ export class UserRegController {
       username,
       password,
     } = req.body;
-    const user = await userReg.retrieveUser(username);
+    const user = await User.retrieveLoginUser(username);
     console.log('User', user[0]);
 
     res.status(200)
@@ -28,11 +28,11 @@ export class UserRegController {
   }
 
   async getOneUserId(req, res) {
-    const tester = await userReg.getUsers();
+    const tester = await User.getLoginUsers();
     console.log('testerID', tester[0].id);
     console.log('params', req.params);
     const id = req.params.userId;
-    const response = await userReg.getUserById(id);
+    const response = await User.getLoginUserById(id);
 
     res.status(200)
       .json({
@@ -49,9 +49,9 @@ export class UserRegController {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const userInfo = await userReg.addNewUser(username, hashedPassword);
+      const userInfo = await User.addNewLoginUser(username, hashedPassword);
 
-      const user = await userReg.retrieveUser(username);
+      const user = await User.retrieveLoginUser(username);
 
       res.status(200)
         .json({
@@ -59,7 +59,7 @@ export class UserRegController {
           user: user[0],
         });
     } catch {
-      res.redirect('/')
+      res.redirect('/');
     }
   }
 
@@ -68,7 +68,7 @@ export class UserRegController {
     console.log('Body', req.body);
     const id = req.params.userId;
     const updatedUser = req.body;
-    const user = await userReg.updateUserById(id, updatedUser);
+    const user = await User.updateLoginUserById(id, updatedUser);
 
     res.redirect('/users');
   }
@@ -76,7 +76,7 @@ export class UserRegController {
   async deleteOneRecord(req, res) {
     console.log(req.params);
     const id = req.params.userId;
-    const response = await userReg.removeUserById(id);
+    const response = await User.removeLoginUserById(id);
 
     // res.redirect('/users');
   }

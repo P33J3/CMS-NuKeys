@@ -40,4 +40,41 @@ export class User {
       .where('id', id)
       .del();
   }
+
+  static async retrieveLoginUser(username) {
+    return db('regusers').where('username', username);
+    // username: this.username,
+    // password: this.password,
+  }
+
+  static async addNewLoginUser(username, password) {
+    return db('regusers').insert({
+      username, password,
+    }).returning('id')
+      .then(([user]) => db('users').insert(({
+        id: user.id,
+        firstname: 'FirstName',
+        lastname: 'LastName',
+      })));
+  }
+
+  static async getLoginUsers() {
+    return db.select().table('regusers');
+  }
+
+  static async getLoginUserById(id) {
+    return db('regusers').where('id', id);
+  }
+
+  static async updateLoginUserById(id, updateObject) {
+    return db('regusers')
+      .where('id', id)
+      .update(updateObject);
+  }
+
+  static async removeLoginUserById(id) {
+    return db('regusers')
+      .where('id', id)
+      .del();
+  }
 }
