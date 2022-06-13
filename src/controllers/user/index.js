@@ -34,11 +34,17 @@ export class UserController {
   }
 
   async addOneUser(req, res) {
-    const { firstname, lastname, age } = req.body;
-    const { address } = req.body;
-    const user = await User.addNewUser(firstname, lastname, age, address);
-
-    res.redirect('/users');
+    try {
+      const {
+        firstname, lastname, age, address, username, password, email,
+      } = req.body;
+      // console.log(req.body);
+      // console.log(username, password, email, firstname, lastname, age, address);
+      const user = await User.addNewUser(username, password, email, firstname, lastname, age, address);
+      res.redirect('/admin/users');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async updateOneUserById(req, res) {

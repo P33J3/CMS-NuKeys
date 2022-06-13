@@ -9,7 +9,13 @@ exports.up = function (knex) {
     t.string('username').notNull();
     t.string('password').notNull();
     t.timestamp('last_login').defaultTo(knex.fn.now());
-    t.integer('profileId').nullable();
+    t.integer('profileId').references('id').inTable('users');
+    t.string('email').notNull();
+    t.string('firstname').notNull();
+    t.string('lastname').notNull();
+    t.integer('age').nullable();
+    t.text('address').nullable();
+    t.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
 

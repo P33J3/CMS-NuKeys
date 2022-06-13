@@ -12,6 +12,6 @@ exports.seed = async function (knex, Promise) {
   await knex('users').del();
   await knex('regusers').del();
   await knex('documents').del();
-  await reg.seed(knex, Promise)
-    .then(() => user.seed(knex, Promise)).then(() => docs.seed(knex, Promise));
+  await user.seed(knex, Promise)
+    .then(() => reg.seed(knex, Promise)).then(() => docs.seed(knex, Promise));
 };

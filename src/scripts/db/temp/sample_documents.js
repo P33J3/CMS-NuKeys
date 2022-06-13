@@ -12,8 +12,8 @@ exports.seed = async function (knex) {
       {
         title: faker.lorem.words(3),
         body: faker.lorem.words(8),
-        author_id: faker.internet.userName(),
-        profileId: 2,
+        // author_id: faker.internet.userName(),
+        // profileId: 2,
       },
     ]);
   }

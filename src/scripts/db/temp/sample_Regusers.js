@@ -10,10 +10,15 @@ exports.seed = async function (knex) {
   for (let i = 0; i < 10; i += 1) {
     await knex('regusers').insert([
       {
-        id: faker.random.number(),
+        // id: faker.random.number(),
         username: faker.internet.userName(),
         password: faker.internet.password(),
-        profileId: faker.random.number(),
+        // profileId: faker.random.number(),
+        email: faker.internet.email(),
+        firstname: faker.name.firstName(),
+        lastname: faker.name.lastName(),
+        age: faker.random.number(),
+        address: faker.address.secondaryAddress(),
 
       },
     ]);

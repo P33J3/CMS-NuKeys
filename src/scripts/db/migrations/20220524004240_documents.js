@@ -8,9 +8,8 @@ exports.up = function (knex) {
 
     t.string('title').notNull();
     t.string('body').nullable();
-    t.string('author_id').nullable();
     t.timestamp('created_at').defaultTo(knex.fn.now());
-    t.integer('profileId');
+    t.integer('authorId').references('id').inTable('users');
   });
 };
 

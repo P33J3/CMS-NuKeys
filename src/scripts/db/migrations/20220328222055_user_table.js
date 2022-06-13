@@ -10,8 +10,10 @@ exports.up = function (knex) {
     t.string('lastname').notNull();
     t.integer('age').nullable();
     t.text('address').nullable();
-    t.integer('profileId');
     t.timestamp('created_at').defaultTo(knex.fn.now());
+    t.string('username').notNull();
+    t.string('password').notNull();
+    t.timestamp('last_login').defaultTo(knex.fn.now());
   });
 };
 

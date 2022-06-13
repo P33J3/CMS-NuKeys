@@ -11,9 +11,9 @@ export class Documents {
   //   };
   // }
 
-  static async addNewDoc(title, body, author, profileId) {
+  static async addNewDoc(title, body, author, authorId) {
     return db('documents').insert({
-      title, body, author, profileId,
+      title, body, author, authorId,
     });
   }
 
@@ -22,7 +22,7 @@ export class Documents {
   }
 
   static async getDocumentById(id) {
-    return db('documents').where('profileId', id);
+    return db('documents').where('id', id);
   }
 
   static async getDocumentByTitle(title) {
@@ -31,13 +31,13 @@ export class Documents {
 
   static async updateDocumentById(id, updateObject) {
     return db('documents')
-      .where('profileId', id)
+      .where('id', id)
       .update(updateObject);
   }
 
   static async removeDocumentById(id) {
     return db('documents')
-      .where('profileId', id)
+      .where('id', id)
       .del();
   }
 }

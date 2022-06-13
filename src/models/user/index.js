@@ -11,10 +11,22 @@ export class User {
     };
   }
 
-  static async addNewUser(firstname, lastname, age, address) {
+  static async addNewUser(username, password, email, firstname, lastname, age, address) {
     return db('users').insert({
-      firstname, lastname, age, address,
-    });
+      username, password, email, firstname, lastname, age, address,
+    })
+      .returning('*')
+      .then(([user]) => db('regusers').insert({
+        // id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        username: user.username,
+        password: user.password,
+        email: user.email,
+        age: user.age,
+        address: user.address,
+        profileId: user.id,
+      }));
   }
 
   static async getUsers() {
@@ -47,15 +59,10 @@ export class User {
     // password: this.password,
   }
 
-  static async addNewLoginUser(username, password) {
+  static async addNewLoginUser(username, password, email, firstname, lastname, age, address) {
     return db('regusers').insert({
-      username, password,
-    }).returning('id')
-      .then(([user]) => db('users').insert(({
-        id: user.id,
-        firstname: 'FirstName',
-        lastname: 'LastName',
-      })));
+      username, password, email, firstname, lastname, age, address,
+    });
   }
 
   static async getLoginUsers() {
