@@ -21,12 +21,30 @@ export class UserController {
     });
   }
 
-  async addOneUser(req, res) {
-    const { firstname, lastname, age } = req.body;
-    const { address } = req.body;
-    const user = await User.addNewUser(firstname, lastname, age, address);
+  async getOneUserEmail(req, res) {
+    const tester = await User.getUsers();
+    console.log('testerID', tester[0].email);
+    console.log('params', req.params);
+    const { email } = req.params;
+    const response = await User.getUserByEmail(email);
 
-    res.redirect('/users');
+    res.status(200).json({
+      response,
+    });
+  }
+
+  async addOneUser(req, res) {
+    try {
+      const {
+        firstname, lastname, age, address, username, password, email,
+      } = req.body;
+      // console.log(req.body);
+      // console.log(username, password, email, firstname, lastname, age, address);
+      const user = await User.addNewUser(username, password, email, firstname, lastname, age, address);
+      res.redirect('/admin/users');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async updateOneUserById(req, res) {

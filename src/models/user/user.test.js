@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { async } from "regenerator-runtime";
 import { User } from "../index";
 import { populateUsers, purgeUsersTable } from "../../helpers";
-import db from "../../lib/knex";
+import { db } from "../../lib/index";
 
 describe("User Model", () => {
   beforeAll(async () => {
@@ -24,12 +24,17 @@ describe("User Model", () => {
   });
 
   it("Expect to add user ", async () => {
-    const user = await User.addNewUser(
-      "TestFName",
-      "TestLName",
-      32,
-      "46 Freshman Way"
-    );
+    await db('users').insert([
+      {
+        id: 90,
+        email: 'law@law.com',
+        firstname: 'Ronald',
+        lastname: 'Levy',
+        age: 57,
+        address: 'James Bond Beach',
+        profileId: 2,
+      },
+    ]);
     const retrieve = db("users").where("firstname", "TestFName");
     //console.log(retrieve._statements[0].value);
     expect(retrieve._statements[0].value).to.eq("TestFName");
@@ -39,6 +44,7 @@ describe("User Model", () => {
     const user = await User.updateUserById(1, {
       firstname: "TestingUpdate",
       lastname: "TestingUpdateLname",
+      email: 'jude@law.com',
       age: 23,
       address: "24 Golden Path",
     })
